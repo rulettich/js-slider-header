@@ -29,7 +29,7 @@ export const createHeader = () => {
 
   HEADER_BUTTON_LIST.forEach((params) => {
     const button = createElement('button', 'button')
-    const img = createElement('img')
+    const img = createElement('img', 'img__ava')
 
     console.log(Object.entries(params))
 

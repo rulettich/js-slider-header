@@ -12,90 +12,85 @@ const title = createElement('h1', 'title', 'Коммьюніті')
 
 page.append(title)
 
-const POST_LIST = [
+const TAB_LIST = [
   {
-    category: [
-      {
-        text: 'Важливо',
-        id: 1,
-      },
-      {
-        text: 'Нова',
-        id: 2,
-      },
-    ],
-    info: 'До біса планувальник, наймаємо дизайнера та нотуємося до презентації, як Джобс',
-    date: '25.01',
-    viewed: false,
+    info: 'База знань',
+    viewed: true,
   },
   {
-    category: [{ text: 'Нова', id: 2 }],
-    info: 'Ми хотіли щоб у цьому чаті було близько 150 людей щоб зробити якісний пак самопрезентацій.',
-    date: '24.01',
-    viewed: true,
+    info: 'Інформація',
+    viewed: false,
   },
 ]
 
-const createPost = () => {
-  const postList = createElement('main', 'post__list')
+const createTab = () => {
+  const tabTwo = createElement('div', 'tab')
 
-  POST_LIST.forEach((postData) => {
-    const post = createElement(
+  TAB_LIST.forEach((item) => {
+    const tab = createElement(
       'div',
-      postData.viewed
-        ? 'post button post--viewed'
-        : 'post button',
+      item.viewed ? 'tab__ch tab--viewed' : 'tab__ch',
     )
-
-    const postHeader = createElement('div', 'post__header')
-
-    //===
-
-    const categoryList = createElement(
+    const text = createElement(
       'div',
-      'post__category-list',
+      'tab__text',
+      item.info,
     )
+    const under = createElement('div', 'tab__under')
 
-    postData.category.forEach((category) => {
-      const categorySpan = createElement(
-        'span',
-        `post__category post__category--${category.id} `,
-        category.text,
-      )
-      categoryList.append(categorySpan)
-    })
+    tab.append(text, under)
 
-    //===
-
-    const dateSpan = createElement(
-      'span',
-      'post__date',
-      postData.date,
-    )
-
-    //===
-    postHeader.append(categoryList, dateSpan)
-
-    //===
-
-    const infoParagraph = createElement(
-      'p',
-      'post__info',
-      postData.info,
-    )
-    post.append(postHeader, infoParagraph)
-
-    //===
-
-    postList.append(post)
+    tabTwo.append(tab)
   })
-
-  return postList
+  return tabTwo
 }
 
-//===
+const tab = createTab()
+page.append(tab)
 
-const post = createPost()
+const INFO_LIST = {
+  width: 340,
+  height: 160,
+  src: '/img/community.png',
+  title: 'Що таке база знань?',
+  text: 'База знань - база даних, що містить правила виведення та інформацію про людський досвід і знання в деякій предметній галузі. У системах, що самонавчаються, база знань також містить інформацію, що є результатом вирішення попередніх завдань.',
+  button: `Перейти до ком'юніті у Телеграм`,
+}
+
+const createInfo = () => {
+  const infoBox = createElement('div', 'info')
+  const img = createElement('img', 'info__img')
+  img.src = INFO_LIST.src
+
+  infoBox.appendChild(img)
+
+  const title = createElement(
+    'div',
+    'info__title',
+    INFO_LIST.title,
+  )
+
+  infoBox.appendChild(title)
+
+  const textContainer = createElement(
+    'div',
+    'info__text',
+    INFO_LIST.text,
+  )
+
+  infoBox.appendChild(textContainer)
+
+  const buttonTeleg = createElement(
+    'div',
+    'button button__teleg',
+    INFO_LIST.button,
+  )
+
+  infoBox.appendChild(buttonTeleg)
+
+  return infoBox
+}
+
+const post = createInfo()
+
 page.append(post)
-
-//===
